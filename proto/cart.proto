@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package cart;
+
+service cart {
+    rpc addCart (Cart) returns (CartResponse) {
+    }
+}
+
+message Cart {
+    int32 rec_id = 1;
+    int32 user_id = 2;
+    string session_id = 3;
+    int32 goods_id = 4;
+    string goods_sn = 5;
+    string goods_name = 6;
+    double market_price = 7;
+    double goods_price = 8;
+    int32 goods_number = 9;
+    string goods_attr = 10;
+    string custom_size = 11;
+    int32 can_handsel = 12;
+    string goods_attr_id = 13;
+    int32 goods_off = 14;
+    int32 lmt_num = 15;
+    int32 addtime = 16;
+    string attr_goods_sn = 17;
+    string shipping_method = 18;
+    int32 goods_type = 19;
+    int32 last_modified = 20;
+    int32 save_one_month = 21;
+    int32 is_selected = 22;
+    int32 wj_linkid = 23;
+    int32 wj_linkid_source = 24;
+    int32 gift = 25;
+    string zaful_source = 26;
+    int32 buytype = 27;
+    string lang = 28;
+    int32 discountPriceType = 29;
+    string app_device_id = 30;
+    int32 pipeline_id = 31;
+}
+
+message CartResponse {
+    bool code = 1;
+    string msg = 2;
+}
+
+message CartListResponse {
+
+}
