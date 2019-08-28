@@ -10,7 +10,7 @@ use Hyperf\HttpServer\Annotation\AutoController;
  * @package App\Controller
  * @AutoController()
  */
-class GrpcController
+class GrpcController extends BaseController
 {
     public function hello()
     {
@@ -22,17 +22,22 @@ class GrpcController
         $request->setName('hyperf');
         $request->setSex(1);
 
-        /**
-         * @var \Grpc\HiReply $reply
-         */
-        list($reply, $status) = $client->sayHello($request);
+        try {
+            /**
+             * @var \Grpc\HiReply $reply
+             */
+            list($reply, $status) = $client->sayHello($request);
 
-        $message = $reply->getMessage();
-        $user = $reply->getUser();
+            $message = $reply->getMessage();
+            $user = $reply->getUser();
 
-        $client->close();
-        var_dump(memory_get_usage(true));
-        print_r($user);
+            $client->close();
+            var_dump(memory_get_usage(true));
+            print_r($user);
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+        }
+
         return $message;
     }
 }
