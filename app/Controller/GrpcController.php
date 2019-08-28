@@ -22,21 +22,14 @@ class GrpcController extends BaseController
         $request->setName('hyperf');
         $request->setSex(1);
 
-        try {
-            /**
-             * @var \Grpc\HiReply $reply
-             */
-            list($reply, $status) = $client->sayHello($request);
+        /**
+         * @var \Grpc\HiReply $reply
+         */
+        list($reply, $status) = $client->sayHello($request);
 
-            $message = $reply->getMessage();
-            $user = $reply->getUser();
+        $message = $reply->getMessage();
 
-            $client->close();
-            var_dump(memory_get_usage(true));
-            print_r($user);
-        } catch (\Exception $e) {
-            $message = $e->getMessage();
-        }
+        $client->close();
 
         return $message;
     }
